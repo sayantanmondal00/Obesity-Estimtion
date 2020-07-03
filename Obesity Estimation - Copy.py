@@ -130,6 +130,34 @@ plt.savefig('Obesity% of all countries in 2016 - Sorted by Country Name.png', dp
 
 
 
+# Potting graph of Obesity% of all countries in 2016 - Sorted by Country Name
+
+# Fitting the data
+countries_both_n = dataset_obesity3[(dataset_obesity3["Year"]==2016) & (dataset_obesity3["Sex"]=="Both sexes")].groupby("Country").Obesity.sum()
+countries_male_n = dataset_obesity3[(dataset_obesity3["Year"]==2016) & (dataset_obesity3["Sex"]=="Male")].groupby("Country").Obesity.sum()
+countries_female_n = dataset_obesity3[(dataset_obesity3["Year"]==2016) & (dataset_obesity3["Sex"]=="Female")].groupby("Country").Obesity.sum()
+
+x = np.arange(len(countries_female_n))
+width = 4
+countries = dataset_obesity3["Country"].unique()
+
+fig, ax = plt.subplots()
+rcParams['figure.figsize'] = 20,10
+ax.bar((20*x),countries_both_n, width, label='Both')
+ax.bar(((20*x)+4),countries_male_n, width, label='Male')
+ax.bar(((20*x)+8),countries_female_n, width, label='Female')
+
+# Add some text for labels, title and custom x-axis tick labels, etc.
+ax.set_ylabel('Obesity %')
+ax.set_xlabel('Country')
+ax.set_title('Obesity% of all countries in 2016 - Sorted by Country Name')
+ax.set_xticks((20*x)+1)
+ax.set_xticklabels(countries)
+plt.xticks(fontsize=3,rotation=90)
+ax.legend()
+plt.savefig('Obesity% of all countries in 2016 - Sorted by Country Name.png', dpi=1080)
+
+
 
 
 
